@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using delegates.Entities;
+using System.Linq;
 
 namespace delegates
 {
@@ -16,11 +17,13 @@ namespace delegates
             list.Add(new Product("Mouse", 50.00));
             list.Add(new Product("HD Case", 80.90));
 
-            list.RemoveAll(p => p.Price >= 100.0);
+            Func<Product, string> func = p => p.Name.ToUpper();
 
-            foreach (Product p in list)
+            List<string> result = list.Select(func).ToList();
+
+            foreach (string s in result)
             {
-                Console.WriteLine(p);
+                Console.WriteLine(s);
             }
         }
     }
